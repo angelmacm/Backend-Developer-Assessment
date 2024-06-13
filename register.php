@@ -44,7 +44,6 @@
         $_SESSION['password'] = $_POST['user_password'];
         $_SESSION['confirm_password'] = $_POST['confirm_password'];
         header("Location: ./?error_status=1&ev=$email_validation&tv=$tel_validation&zv=$zip_validation&pm=$password_mismatch");
-        
     } else {
         send_registration_email($email, $name);
         header("Location: ./success.php");
