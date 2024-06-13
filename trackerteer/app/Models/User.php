@@ -8,8 +8,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use HasFactory;
-    protected $connection = 'second_db';
+    // protected $connection = 'second_db';
     protected $fillable = [
-        'name', 'email', 'telephone', 'address_1', 'address_2', 'city', 'state', 'zip_code', 'username', 'password'
+        'user_name',
+        'user_email',
+        'user_tel',
+        'user_addr1',
+        'user_addr2',
+        'user_city',
+        'user_state',
+        'user_zip_code',
+        'user_username',
+        'user_password'
     ];
 }

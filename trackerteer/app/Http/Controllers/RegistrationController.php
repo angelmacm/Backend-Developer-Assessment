@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
+use App\Http\Controllers\SendMailController;
 class RegistrationController extends Controller
 {
     public function showForm()
@@ -20,7 +21,7 @@ class RegistrationController extends Controller
         $validator = Validator::make($request->all(), [
             'user_name' => 'required|string|max:255',
             'user_email' => 'required|string|email|max:255|unique:users',
-            'user_telephone' => 'required|integer',
+            'user_tel' => 'required|integer',
             'user_addr1' => 'required|string|max:255',
             'user_addr2' => 'nullable|string|max:255',
             'user_city' => 'required|string|max:255',
@@ -38,23 +39,21 @@ class RegistrationController extends Controller
         }
 
         $user = User::create([
-            'user_name' => $request->name,
-            'user_email' => $request->email,
-            'user_telephone' => $request->telephone,
-            'user_addr1' => $request->address_1,
-            'user_addr2' => $request->address_2,
-            'user_city' => $request->city,
-            'user_state' => $request->state,
-            'user_zip_code' => $request->zip_code,
-            'user_username' => $request->username,
-            'user_password' => Hash::make($request->password),
+            'user_name' => $request->user_name,
+            'user_email' => $request->user_email,
+            'user_tel' => $request->user_tel,
+            'user_addr1' => $request->user_addr1,
+            'user_addr2' => $request->user_addr2,
+            'user_city' => $request->user_city,
+            'user_state' => $request->user_state,
+            'user_zip_code' => $request->user_zip_code,
+            'user_username' => $request->user_username,
+            'user_password' => Hash::make($request->user_password),
         ]);
 
-        Mail::raw('Thank you for registering!', function ($message) use ($user) {
-            $message->to($user->email)
-                    ->subject('Registration Confirmation');
-        });
+        $mailer = new SendMailController();
+        $mailer->send_registration_email($request->user_email, $request->user_name);
 
-        return redirect()->route('congratulations')->with('name', $user->name);
+        return redirect()->route('congratulations')->with('name', $user->user_name);
     }
 }

@@ -26,8 +26,8 @@
             </div>
             <div class="input-container">
                 <label for="telephone" class="form-label">Telephone:</label>
-                <input type="text" class="form-input" id="telephone" name="user_telephone" value="{{ old('user_telephone') }}" required>
-                @error('user_telephone')
+                <input type="text" class="form-input" id="telephone" name="user_tel" value="{{ old('user_tel') }}" required>
+                @error('user_tel')
                     <div class="error">{{ $message }}</div>
                 @enderror
             </div>

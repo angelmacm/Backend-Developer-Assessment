@@ -17,14 +17,16 @@ class CreateUsersTable extends Migration
             $table->id('user_id');
             $table->string('user_name');
             $table->string('user_email')->unique();
-            $table->integer('user_tel');
+            $table->string('user_tel');
             $table->string('user_addr1');
             $table->string('user_addr2')->nullable();
             $table->string('user_city');
             $table->string('user_state');
-            $table->integer('user_zip_code');
+            $table->string('user_zip_code');
             $table->string('user_username')->unique();
             $table->string('user_password');
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

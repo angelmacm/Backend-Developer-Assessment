@@ -39,12 +39,12 @@ return [
 
         'smtp' => [
             'transport' => 'smtp',
-            'url' => env('MAIL_URL'),
-            'host' => env('MAIL_HOST', '127.0.0.1'),
-            'port' => env('MAIL_PORT', 2525),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('MAIL_USERNAME'),
-            'password' => env('MAIL_PASSWORD'),
+            // 'url' => env('MAIL_URL'),
+            'host' => env('MAIL_HOST', 'smtp.mailersend.net'),
+            'port' => env('MAIL_PORT', 587),
+            'encryption' => env('MAIL_ENCRYPTION', ''),
+            'username' => env('MAIL_USERNAME', 'MS_Y4jNA8@trial-0r83ql3o06xlzw1j.mlsender.net'),
+            'password' => env('MAIL_PASSWORD', '3YO5tpmSsHa7M2OM'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
