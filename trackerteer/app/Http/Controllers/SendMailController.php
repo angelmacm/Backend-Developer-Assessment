@@ -40,4 +40,3 @@ class SendMailController extends Controller
         }
     }
 }
-

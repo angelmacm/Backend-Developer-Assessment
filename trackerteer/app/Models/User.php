@@ -21,4 +21,12 @@ class User extends Authenticatable
         'user_username',
         'user_password'
     ];
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id');
+    }
 }
