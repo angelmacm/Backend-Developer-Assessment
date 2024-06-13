@@ -1,9 +1,5 @@
 <?php
     session_start();
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +14,7 @@
     <div class="congrats-container">
         <div class="congrats-message">
             <h1>Congratulations!</h1>
-            <p>Thank you for registering. We are excited to have you with us!</p>
+            <p>Thank you <?php echo $_SESSION['name'] ?> for registering. We are excited to have you with us!</p>
             <p>Check your email for more details.</p>
             <a href="./" class="button">Go to Homepage</a>
         </div>

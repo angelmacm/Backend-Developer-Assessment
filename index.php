@@ -13,24 +13,34 @@ try {
     $zip_code = $errorStatus ? $_SESSION['zip_code'] : null;
     $username = $errorStatus ? $_SESSION['username'] : null;
     $password = $errorStatus ? $_SESSION['password'] : null;
+    $confirm_password = $errorStatus ? $_SESSION['confirm_password'] : null;
     
     $email_error = false;
     $tel_error = false;
     $zip_error = false;
+    $password_mismatch = false;
 
     if(isset($_GET['ev'])){
         if(!$_GET['ev']){
             $email_error = true;
         }
     }
+
     if(isset($_GET['tv'])){
         if(!$_GET['tv']){
             $tel_error = true;
         }
     }
+
     if(isset($_GET['zv'])){
         if(!$_GET['zv']){
             $zip_error = true;
+        }
+    }
+
+    if(isset($_GET['pm'])){
+        if(!$_GET['pm']){
+            $password_mismatch = true;
         }
     }
 
@@ -142,9 +152,19 @@ try {
                 <label for="user_password" class="form-label">Password: </label>
                 <input type="password" 
                        id="user_password" 
-                       class="form-input"
+                       class="form-input<?php echo $password_mismatch ?  " error" : ''; ?>"
                        name="user_password" 
                        value="<?php echo htmlspecialchars($password); ?>"  
+                       required/>
+            </div>
+
+            <div class="input-container">
+                <label for="confirm_password" class="form-label">Confirm Password: </label>
+                <input type="password" 
+                       id="confirm_password" 
+                       class="form-input<?php echo $password_mismatch ?  " error" : ''; ?>"
+                       name="confirm_password" 
+                       value="<?php echo htmlspecialchars($confirm_password); ?>"  
                        required/>
             </div>
 

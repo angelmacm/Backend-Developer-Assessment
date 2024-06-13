@@ -14,6 +14,7 @@
     $zip_code = $_POST['user_zip_code'];
     $username = $_POST['user_username'];
     $password = $_POST['user_password'];
+    $confirm_password = $_POST['confirm_password'];
 
     // use preg_match to compare if the email input matches that of the regex pattern of email
     $email_validation = preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $email);
@@ -24,11 +25,13 @@
     // assuming that this is for Philippine use, check for alphabets in the zip code
     $zip_validation = !preg_match("/[a-zA-Z]/i", $zip_code);
 
+    $password_mismatch = $password == $confirm_password;
+
     $_SESSION['name'] = $_POST['user_name'];
     $_SESSION['email'] = $_POST['user_email'];
     
     // check if anything had an error
-    if(!$email_validation || !$tel_validation || !$zip_validation){
+    if(!$email_validation || !$tel_validation || !$zip_validation || !$password_mismatch){
         
         // save data in session storage to be able to access in the registration page without appearing in the link
         $_SESSION['tel'] = $_POST['user_tel'];
@@ -39,10 +42,11 @@
         $_SESSION['zip_code'] = $_POST['user_zip_code'];
         $_SESSION['username'] = $_POST['user_username'];
         $_SESSION['password'] = $_POST['user_password'];
-        header("Location: /test?error_status=1&ev=$email_validation&tv=$tel_validation&zv=$zip_validation");
+        $_SESSION['confirm_password'] = $_POST['confirm_password'];
+        header("Location: ./?error_status=1&ev=$email_validation&tv=$tel_validation&zv=$zip_validation&pm=$password_mismatch");
         
     } else {
         send_registration_email($email, $name);
-        header("Location: /test/success.php");
+        header("Location: ./success.php");
     }
 ?>
